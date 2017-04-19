@@ -10,6 +10,8 @@ var EventEmitter = require('events').EventEmitter;
 var util = require('util');
 var https = require('https');
 var http = require('http');
+var HttpsProxyAgent = require('https-proxy-agent');
+var url = require('url');
 
 exports.Request = module.exports.Request = Request;
 
@@ -25,11 +27,22 @@ function Request (application, options) {
     self.endpoint = options.endpoint;
     self.requestSource = application.requestSource;
 
-    var _http = application.secure ? https : http;
-
     var requestOptions = self._requestOptions();
 
-    requestOptions.agent = application._agent;
+    if (application.secure) {
+      var _http = https
+      var proxy_uri = process.env.https_proxy;
+
+      if (proxy_uri) {
+        var proxy = process.env.https_proxy;
+        var agent = new HttpsProxyAgent(proxy);
+      }
+    } else {
+      var _http = http
+      var agent = application._agent;
+    }
+
+    requestOptions.agent = agent;
 
     var request = _http.request(requestOptions, function(response) {
         self._handleResponse(response);

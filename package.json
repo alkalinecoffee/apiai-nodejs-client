@@ -32,6 +32,9 @@
     "url": "https://github.com/api-ai/api-ai-node-js/issues"
   },
   "homepage": "https://github.com/api-ai/api-ai-node-js#readme",
+  "dependencies": {
+    "https-proxy-agent": "^1.0.0"
+  },
   "devDependencies": {
     "@types/node": "^7.0.5",
     "nodemon": "^1.11.0",
