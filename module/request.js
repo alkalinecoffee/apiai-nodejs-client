@@ -34,8 +34,7 @@ function Request (application, options) {
       var proxy_uri = process.env.https_proxy;
 
       if (proxy_uri) {
-        var proxy = process.env.https_proxy;
-        var agent = new HttpsProxyAgent(proxy);
+        var agent = new HttpsProxyAgent(proxy_uri);
       }
     } else {
       var _http = http
