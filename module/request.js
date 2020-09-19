@@ -31,7 +31,7 @@ function Request (application, options) {
 
     if (application.secure) {
       var _http = https
-      var proxy_uri = process.env.https_proxy;
+      var proxy_uri = process.env.HTTP_PROXY;
 
       if (proxy_uri) {
         var agent = new HttpsProxyAgent(proxy_uri);
